@@ -1,5 +1,7 @@
-import data_structures.linked_list.SortedLinkedList;
-import data_structures.linked_list.UnsortedLinkedList;
+import data_structures.hash_maps.HashMap;
+import data_structures.linked_list.doubly_linked.SortedDoublyLinkedList;
+import data_structures.linked_list.singly_linked.SortedLinkedList;
+import data_structures.linked_list.singly_linked.UnsortedLinkedList;
 import data_structures.trees.BinarySearchTree;
 import person.Person;
 
@@ -11,6 +13,8 @@ public class DataStructuresDriver {
         BinarySearchTree test = new BinarySearchTree();
         UnsortedLinkedList uslist = new UnsortedLinkedList();
         SortedLinkedList slist = new SortedLinkedList();
+        SortedDoublyLinkedList doubList = new SortedDoublyLinkedList();
+        HashMap map = new HashMap(10);
 
         Person steve = new Person("Steve", 31);
         Person rich = new Person("Rich", 28);
@@ -40,7 +44,28 @@ public class DataStructuresDriver {
         
         // System.out.println(test.search(lisa, test.getRoot()));
 
-        
+        // doubList.insertAll(people);
+        // System.out.println(doubList);
+
+        // System.out.println("Search steve: " + doubList.search(steve) + ", Search Alana: " + doubList.search(alana) +
+        //     ", Search Mike: " + doubList.search(mike) + ", Search Ryan: " + doubList.search(new Person("Ryan", 23)));
+
+        // doubList.remove(steve);
+        // System.out.println(doubList);
+
+        // doubList.remove(alana);
+        // doubList.insert(steve);
+        // doubList.insert(new Person("Silus", 21));
+        // System.out.println(doubList);
+
+        // doubList.remove(mike);
+        // System.out.println(doubList);
+
+
+
+        map.insertAll(people);
+        System.out.println(map.toString());
+
     } //main
 
 } //DataStructuresDriver

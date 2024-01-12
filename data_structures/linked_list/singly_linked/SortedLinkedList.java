@@ -1,4 +1,4 @@
-package data_structures.linked_list;
+package data_structures.linked_list.singly_linked;
 
 import person.Person;
 import nodes.linked.Node;

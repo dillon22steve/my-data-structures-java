@@ -20,9 +20,6 @@ public class Queue<T extends Comparable<T>> {
             front = nodeToQueue;
         } else {
             nodeToQueue.setNext(rear);
-            if (front == rear) {
-                System.out.println("Reached");
-            }
             rear = nodeToQueue;
         } //if
     } //enqueue

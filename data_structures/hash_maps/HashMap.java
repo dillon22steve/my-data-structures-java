@@ -1,22 +1,25 @@
 package data_structures.hash_maps;
 
-import data_structures.DataStructure;
-import data_structures.linked_list.singly_linked.UnsortedLinkedList;
+import nodes.hash_map.HashMapNode;
 import person.Person;
+
 
 public class HashMap {
 
-    private UnsortedLinkedList<Person>[] map;
+    private HashMapNode[] map;
+    private int size;
 
-    public HashMap(int size) {
-        //map = new UnsortedLinkedList<Person>[size];
+
+    public HashMap(int initialSize) {
+        this.size = initialSize;
+        map = new HashMapNode[size];
     } //constructor
 
 
     private int hashFunction(Person person) {
         int hashCode = generateHashCode(person.getId());
 
-        return hashCode % map.length;
+        return hashCode % size;
     } //hashFunction
 
     private int generateHashCode(String id) {
@@ -30,13 +33,19 @@ public class HashMap {
     } //generateHashCode
 
 
+    public void insert(Person person) {
+        int hashIndex = hashFunction(person);
 
-    public void insert(Person personToInsert) {
-        int hashIndex = hashFunction(personToInsert);
+        if (map[hashIndex] == null) {
+            map[hashIndex] = new HashMapNode(person);
+        } else {
+            HashMapNode temp = map[hashIndex];
+            while (temp.getNext() != null) {
+                temp = temp.getNext();
+            } //while
 
-        if (map[hashIndex] == null) map[hashIndex] = new UnsortedLinkedList<Person>();
-
-        map[hashIndex].insert(personToInsert);
+            temp.setNext(new HashMapNode(person));
+        } //if
     } //insert
 
     public void insertAll(Person[] people) {
@@ -46,27 +55,40 @@ public class HashMap {
     } //insertAll
 
 
-
     public void remove(Person personToRemove) {
         int hashIndex = hashFunction(personToRemove);
-        UnsortedLinkedList<Person> listAtHash = map[hashIndex];
-        if (listAtHash != null) 
-            map[hashIndex].remove(personToRemove);
-    }
 
+        if (map[hashIndex] != null) {
+            HashMapNode temp = map[hashIndex];
+            if (temp.getData().compareTo(personToRemove) == 0) {
+                map[hashIndex] = temp.getNext();
+            } else {
+                while (temp.getNext() != null) {
+                    if (temp.getNext().getData().compareTo(personToRemove) == 0) {
+                        temp.setNext(temp.getNext().getNext());
+                    } else {
+                        temp = temp.getNext();
+                    } //if
+                } //while
+            } //if
+        } //if
+    } //remove
 
 
     public boolean search(Person personToSearch) {
         int hashIndex = hashFunction(personToSearch);
-        UnsortedLinkedList<Person> listAtHash = map[hashIndex];
-        if (map[hashIndex] != null) {
-            return listAtHash.search(personToSearch);
-        } else {
-            listAtHash = new UnsortedLinkedList<Person>();
-            return false;
-        } //if
-    } //search
 
+        HashMapNode temp = map[hashIndex];
+        while (temp != null ) {
+            if (temp.getData().compareTo(personToSearch) == 0) {
+                return true;
+            } else {
+                temp = temp.getNext();
+            } //if
+        } //while
+
+        return false;
+    } //search
 
 
     public void destroy() {
@@ -76,17 +98,34 @@ public class HashMap {
 
     public String toString() {
         String str = "";
+
         for (int i = 0; i < map.length - 1; i++) {
-            if (map[i] != null) {
-                str += map[i].toString() + "    [NEXT LIST]    ";
+            HashMapNode temp = map[i];
+
+            if (temp != null) {
+                str = str + "index " + i +": " + listToString(temp) + "\n";
             } //if
         } //for
 
         if (map[map.length - 1] != null) {
-            str += map[map.length - 1].toString();
+            str = str + "index " + (map.length - 1) +": " + listToString(map[map.length - 1]);
         } //if
 
         return str;
     } //toString
+
+    private String listToString(HashMapNode list) {
+        if (list == null) return "";
+
+        String str = "";
+        while (list.getNext() != null) {
+            str = str + "[" + list.getData().toString() + "] -> ";
+            list = list.getNext();
+        } //while
+
+        str = str + "[" + list.getData().toString() + "]";
+
+        return str;
+    } //listToString
     
-} //HashMap
+} //HashMap2

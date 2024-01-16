@@ -1,5 +1,6 @@
 package test;
 
+import data_structures.hash_maps.HashMap;
 import data_structures.linked_list.doubly_linked.SortedDoublyLinkedList;
 import data_structures.linked_list.singly_linked.SortedLinkedList;
 import data_structures.linked_list.singly_linked.UnsortedLinkedList;
@@ -27,7 +28,7 @@ public class Tester {
 
 
     public Tester() {
-        Person.initIdChars();
+        
     } //constructor
 
 
@@ -38,6 +39,7 @@ public class Tester {
         testTrees();
         testQueues();
         testStack();
+        testHashMap();
     } //RunTests
 
 
@@ -206,6 +208,27 @@ public class Tester {
         System.out.println("*************************************************************************************");
         System.out.println();
     } //testNormalQueue
+
+
+
+    private void testHashMap() {
+        System.out.println("*** Test HashMap ***");
+        
+        HashMap map = new HashMap(50);
+        map.insertAll(people);
+
+        System.out.println(map);
+        System.out.println();
+
+
+        for (int i = 0; i < people.length; i++) {
+            System.out.print(people[i].getName() + ": " + map.search(people[i]) + ",   ");
+        } //for
+        System.out.print("\n");
+
+        System.out.println("*************************************************************************************");
+        System.out.println();
+    } //testHashMap
 
 
 

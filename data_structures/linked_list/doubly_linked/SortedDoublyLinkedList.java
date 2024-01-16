@@ -2,12 +2,11 @@ package data_structures.linked_list.doubly_linked;
 
 import data_structures.DataStructure;
 import nodes.linked.DoublyLinkedNode;
-import person.Person;
 
 
-public class SortedDoublyLinkedList implements DataStructure {
+public class SortedDoublyLinkedList<T extends Comparable<T>> implements DataStructure<T> {
 
-    private DoublyLinkedNode head;
+    private DoublyLinkedNode<T> head;
 
 
     public SortedDoublyLinkedList() {
@@ -16,19 +15,19 @@ public class SortedDoublyLinkedList implements DataStructure {
 
 
     @Override
-    public void insert(Person personToInsert) {
+    public void insert(T itemToInsert) {
         if (head == null) {
-            head = new DoublyLinkedNode(personToInsert);
-        } else if (personToInsert.compareTo(head.getData()) < 0) {
-            DoublyLinkedNode nodeToInsert = new DoublyLinkedNode(personToInsert);
+            head = new DoublyLinkedNode<T>(itemToInsert);
+        } else if (itemToInsert.compareTo(head.getData()) < 0) {
+            DoublyLinkedNode<T> nodeToInsert = new DoublyLinkedNode<T>(itemToInsert);
             nodeToInsert.setNext(head);
             head.setBack(nodeToInsert);
             head = nodeToInsert;
         } else {
-            DoublyLinkedNode temp = head;
-            DoublyLinkedNode nodeToInsert = new DoublyLinkedNode(personToInsert);
+            DoublyLinkedNode<T> temp = head;
+            DoublyLinkedNode<T> nodeToInsert = new DoublyLinkedNode<T>(itemToInsert);
             while (temp != null) {
-                if (personToInsert.compareTo(temp.getData()) < 0) {
+                if (itemToInsert.compareTo(temp.getData()) < 0) {
                     swapNodes(temp, nodeToInsert);
                     return;
                 } else {
@@ -44,8 +43,8 @@ public class SortedDoublyLinkedList implements DataStructure {
         } //if
     } //insert
 
-    private void swapNodes(DoublyLinkedNode node, DoublyLinkedNode nodeToInsert) {
-        DoublyLinkedNode prev = node.getBack();
+    private void swapNodes(DoublyLinkedNode<T> node, DoublyLinkedNode<T> nodeToInsert) {
+        DoublyLinkedNode<T> prev = node.getBack();
         if (prev != null) {
             prev.setNext(nodeToInsert);
         } //if
@@ -55,19 +54,19 @@ public class SortedDoublyLinkedList implements DataStructure {
         node.setBack(nodeToInsert);
     } //swapNodes
 
-    public void insertAll(Person[] people) {
-        for (Person person : people) {
-            this.insert(person);
+    public void insertAll(T[] items) {
+        for (T item : items) {
+            this.insert(item);
         } //for
     } //insertAll
 
 
 
     @Override
-    public void remove(Person personToRemove) {
+    public void remove(T itemToRemove) {
         if (isEmpty()) {
             return;
-        } else if (personToRemove.equals(head.getData())) {
+        } else if (itemToRemove.compareTo(head.getData()) == 0) {
             if (head.getNext() == null) {
                 //if head is the only node in the list, make the list empty.
                 destroy();
@@ -76,11 +75,11 @@ public class SortedDoublyLinkedList implements DataStructure {
                 head.setBack(null);
             } //if
         } else {
-            DoublyLinkedNode temp = head;
+            DoublyLinkedNode<T> temp = head;
             while (temp != null) {
-                if (personToRemove.equals(temp.getData())) {
-                    DoublyLinkedNode prev = temp.getBack();
-                    DoublyLinkedNode next = temp.getNext();
+                if (itemToRemove.compareTo(temp.getData()) == 0) {
+                    DoublyLinkedNode<T> prev = temp.getBack();
+                    DoublyLinkedNode<T> next = temp.getNext();
 
                     if (prev != null) prev.setNext(next);
                     if (next != null) next.setBack(prev);
@@ -95,13 +94,13 @@ public class SortedDoublyLinkedList implements DataStructure {
 
 
     @Override
-    public boolean search(Person personToSearch) {
+    public boolean search(T itemToSearch) {
         if (isEmpty()) {
             return false;
         } else {
-            DoublyLinkedNode temp = head;
+            DoublyLinkedNode<T> temp = head;
             while (temp != null) {
-                if (personToSearch.equals(temp.getData())) {
+                if (itemToSearch.compareTo(temp.getData()) == 0) {
                     return true;
                 } //if
 
@@ -128,14 +127,14 @@ public class SortedDoublyLinkedList implements DataStructure {
             return "";
         } else {
             String strToReturn = "";
-            DoublyLinkedNode temp = head;
+            DoublyLinkedNode<T> temp = head;
             while (temp.getNext() != null) {
-                Person data = temp.getData();
-                strToReturn = strToReturn + "[" + data.getName() + " is " + data.getAge() + "], ";
+                T data = temp.getData();
+                strToReturn = strToReturn + "[" + data.toString() + "], ";
                 temp = temp.getNext();
             } //while
 
-            return (strToReturn + "[" + temp.getData().getName() + " is " + temp.getData().getAge() + "]");
+            return (strToReturn + "[" + temp.getData().toString() + "]");
         } //if
     }
     

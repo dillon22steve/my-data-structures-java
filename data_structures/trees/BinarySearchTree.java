@@ -1,11 +1,10 @@
 package data_structures.trees;
 
-import person.Person;
-import nodes.trees.BstNode;
+import nodes.trees.TreeNode;
 
-public class BinarySearchTree extends Tree {
+public class BinarySearchTree<T extends Comparable<T>> extends Tree<T> {
 
-    private BstNode root;
+    private TreeNode<T> root;
 
 
     public BinarySearchTree() {
@@ -14,23 +13,23 @@ public class BinarySearchTree extends Tree {
 
 
 
-    public void insert(Person personToInsert, BstNode node) {
+    public void insert(T itemToInsert, TreeNode<T> node) {
         if (root == null) {
-            root = new BstNode(personToInsert);
+            root = new TreeNode<T>(itemToInsert);
             return;
         } else {
-            int compare = personToInsert.compareTo(node.getData());
+            int compare = itemToInsert.compareTo(node.getData());
             if (compare < 0) {
                 if (node.getLeftChild() == null) {
-                    node.setLeftChild(new BstNode(personToInsert));
+                    node.setLeftChild(new TreeNode<T>(itemToInsert));
                 } else {
-                    insert(personToInsert, node.getLeftChild());
+                    insert(itemToInsert, node.getLeftChild());
                 } //if
             } else if (compare > 0) {
                 if (node.getRightChild() == null) {
-                    node.setRightChild(new BstNode(personToInsert));
+                    node.setRightChild(new TreeNode<T>(itemToInsert));
                 } else {
-                    insert(personToInsert, node.getRightChild());
+                    insert(itemToInsert, node.getRightChild());
                 } //if
             } else {
                 //If this is reached, that means the person is already present in
@@ -40,18 +39,24 @@ public class BinarySearchTree extends Tree {
         } //if
     } //insert
 
+    public void insertAll(T[] items) {
+        for (T item : items) {
+            insert(item, root);
+        } //for
+    } //insertAll
 
 
-    public BstNode remove(Person personToDelete, BstNode tree) {
+
+    public TreeNode<T> remove(T itemToDelete, TreeNode<T> tree) {
         if (tree == null) {
             return null;
         } else {
-            int compare = personToDelete.compareTo(tree.getData());
+            int compare = itemToDelete.compareTo(tree.getData());
             if (compare < 0) {
-                tree.setLeftChild(remove(personToDelete, tree.getLeftChild()));
+                tree.setLeftChild(remove(itemToDelete, tree.getLeftChild()));
                 return tree;
             } else if (compare > 0) {
-                tree.setRightChild(remove(personToDelete, tree.getRightChild()));
+                tree.setRightChild(remove(itemToDelete, tree.getRightChild()));
                 return tree;
             } else if (compare == 0) {
                 if (isLeafNode(tree)) {
@@ -74,14 +79,14 @@ public class BinarySearchTree extends Tree {
     } //remove
 
 
-    private boolean isLeafNode(BstNode node) {
+    private boolean isLeafNode(TreeNode<T> node) {
         if (node.getLeftChild() == null && node.getRightChild() == null) {
             return true;
         } else {
             return false;
         } //if
     } //isLeafNode
-    private boolean hasTwoChildren(BstNode node) {
+    private boolean hasTwoChildren(TreeNode<T> node) {
         if (node.getLeftChild() != null && node.getRightChild() != null) {
             return true;
         } else {
@@ -90,14 +95,14 @@ public class BinarySearchTree extends Tree {
     } //hasTwoChildren
 
 
-    private void swapWithHighestLeft(BstNode tree) {
-        BstNode replacement = findHighestLeftSubtree(tree.getLeftChild());
+    private void swapWithHighestLeft(TreeNode<T> tree) {
+        TreeNode<T> replacement = findHighestLeftSubtree(tree.getLeftChild());
         tree.setData(replacement.getData());
         remove(replacement.getData(), tree.getLeftChild());
     } //swapWithHighestLeft
 
-    private BstNode findHighestLeftSubtree(BstNode tree) {
-        BstNode temp = tree.getRightChild();
+    private TreeNode<T> findHighestLeftSubtree(TreeNode<T> tree) {
+        TreeNode<T> temp = tree.getRightChild();
         while (temp.getRightChild() != null) {
             temp = temp.getRightChild();
         } //while
@@ -115,7 +120,7 @@ public class BinarySearchTree extends Tree {
     } //isEmpty
 
 
-    public BstNode getRoot() {
+    public TreeNode<T> getRoot() {
         return this.root;
     } //getRoot
     

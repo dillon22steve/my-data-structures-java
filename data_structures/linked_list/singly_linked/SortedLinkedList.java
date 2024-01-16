@@ -1,24 +1,23 @@
 package data_structures.linked_list.singly_linked;
 
-import person.Person;
 import nodes.linked.Node;
 
 
-public class SortedLinkedList extends LinkedList {
+public class SortedLinkedList<T extends Comparable<T>> extends LinkedList<T> {
 
     @Override
-    public void insert(Person personToInsert) {
-        Node nodeToInsert = new Node(personToInsert);
+    public void insert(T itemToInsert) {
+        Node<T> nodeToInsert = new Node<T>(itemToInsert);
         if (isEmpty()) {
             head = nodeToInsert;
-        } else if (personToInsert.compareTo(head.getData()) < 0) {
+        } else if (itemToInsert.compareTo(head.getData()) < 0) {
             nodeToInsert.setNext(head);
             head = nodeToInsert;
         } else {
-            Node temp = head;
-            Node next = temp.getNext();
+            Node<T> temp = head;
+            Node<T> next = temp.getNext();
             while (next != null) {
-                if (personToInsert.compareTo(next.getData()) < 0) {
+                if (itemToInsert.compareTo(next.getData()) < 0) {
                     nodeToInsert.setNext(next);
                     temp.setNext(nodeToInsert);
                     return;

@@ -1,6 +1,6 @@
 package person;
 
-public class Person {
+public class Person implements Comparable<Person> {
 
     public static final int NUM_CHARS = 70;
 
@@ -101,5 +101,11 @@ public class Person {
     public String getId() {
         return this.id;
     } //getId
+
+
+    @Override
+    public String toString() {
+        return this.name;
+    } //toString
 
 } //Person

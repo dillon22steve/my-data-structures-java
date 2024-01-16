@@ -1,6 +1,6 @@
 package data_structures.trees;
 
-import nodes.trees.BstNode;
+import nodes.trees.TreeNode;
 import person.Person;
 
 

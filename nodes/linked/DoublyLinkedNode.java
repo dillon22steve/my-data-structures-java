@@ -1,35 +1,34 @@
 package nodes.linked;
 
-import person.Person;
 
 
-public class DoublyLinkedNode {
+public class DoublyLinkedNode<T extends Comparable<T>> {
 
-    private DoublyLinkedNode next, back;
-    private Person data;
+    private DoublyLinkedNode<T> next, back;
+    private T data;
 
 
-    public DoublyLinkedNode(Person data) {
+    public DoublyLinkedNode(T data) {
         this.data = data;
     } //constructor
 
 
-    public DoublyLinkedNode getNext() {
+    public DoublyLinkedNode<T> getNext() {
         return next;
     } //getNext
-    public void setNext(DoublyLinkedNode next) {
+    public void setNext(DoublyLinkedNode<T> next) {
         this.next = next;
     } //setNext
-    public DoublyLinkedNode getBack() {
+    public DoublyLinkedNode<T> getBack() {
         return back;
     } //getBack
-    public void setBack(DoublyLinkedNode back) {
+    public void setBack(DoublyLinkedNode<T> back) {
         this.back = back;
     } //setBack
-    public Person getData() {
+    public T getData() {
         return data;
     } //getData
-    public void setData(Person data) {
+    public void setData(T data) {
         this.data = data;
     } //setData
     

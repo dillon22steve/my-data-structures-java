@@ -1,13 +1,12 @@
 package nodes.trees;
 
-import person.Person;
 
-public class BstNode {
+public class TreeNode<T extends Comparable<T>> {
 
-    private BstNode leftChild, rightChild;
-    private Person data;
+    private TreeNode<T> leftChild, rightChild;
+    private T data;
 
-    public BstNode(Person data) {
+    public TreeNode(T data) {
         this.data = data;
         leftChild = null;
         rightChild = null;
@@ -15,27 +14,27 @@ public class BstNode {
 
 
 
-    public BstNode getLeftChild() {
+    public TreeNode<T> getLeftChild() {
         return leftChild;
     } //getLeftChild
 
-    public void setLeftChild(BstNode leftChild) {
+    public void setLeftChild(TreeNode<T> leftChild) {
         this.leftChild = leftChild;
     } //setLeftChild
 
-    public BstNode getRightChild() {
+    public TreeNode<T> getRightChild() {
         return rightChild;
     } //getRightChild
 
-    public void setRightChild(BstNode rightChild) {
+    public void setRightChild(TreeNode<T> rightChild) {
         this.rightChild = rightChild;
     } //setRightChild
 
-    public Person getData() {
+    public T getData() {
         return data;
     } //getData
 
-    public void setData(Person data) {
+    public void setData(T data) {
         this.data = data;
     } //setData
 

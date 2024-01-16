@@ -1,11 +1,10 @@
 package data_structures.trees;
 
-import nodes.trees.BstNode;
-import person.Person;
+import nodes.trees.TreeNode;
 
-public class Tree {
+public class Tree<T extends Comparable<T>> {
 
-    BstNode root;
+    TreeNode<T> root;
 
 
     public Tree() {
@@ -14,49 +13,49 @@ public class Tree {
 
     
 
-    public boolean search(Person personToSearch, BstNode tree) {
+    public boolean search(T itemToSearch, TreeNode<T> tree) {
         if (tree == null) {
             return false;
-        } else if (personToSearch.equals(tree.getData())) {
+        } else if (itemToSearch.compareTo(tree.getData()) == 0) {
             return true;
         } else {
-            int compare = personToSearch.compareTo(tree.getData());
+            int compare = itemToSearch.compareTo(tree.getData());
             if (compare < 0) {
-                return search(personToSearch, tree.getLeftChild());
+                return search(itemToSearch, tree.getLeftChild());
             } else {
-                return search(personToSearch, tree.getRightChild());
+                return search(itemToSearch, tree.getRightChild());
             } //if
         } //if
     } //search
 
 
 
-    public void inOrderTraversal(BstNode tree) {
+    public void inOrderTraversal(TreeNode<T> tree) {
         if (tree == null) {
             return;
         } //if
 
         inOrderTraversal(tree.getLeftChild());
-        System.out.print("[" + tree.getData().getName() + "], ");
+        System.out.print("[" + tree.getData().toString() + "], ");
         inOrderTraversal(tree.getRightChild());
     } //inOrderTraversal
 
-    public void postOrderTraversal(BstNode tree) {
+    public void postOrderTraversal(TreeNode<T> tree) {
         if (tree == null) {
             return;
         } //if
 
         inOrderTraversal(tree.getLeftChild());
         inOrderTraversal(tree.getRightChild());
-        System.out.print("[" + tree.getData().getName() + "], ");
+        System.out.print("[" + tree.getData().toString() + "], ");
     } //postOrderTraversal
 
-    public void preOrderTraversal(BstNode tree) {
+    public void preOrderTraversal(TreeNode<T> tree) {
         if (tree == null) {
             return;
         } //if
 
-        System.out.print("[" + tree.getData().getName() + "], ");
+        System.out.print("[" + tree.getData().toString() + "], ");
         inOrderTraversal(tree.getLeftChild());
         inOrderTraversal(tree.getRightChild());
     } //preOrderTraversal

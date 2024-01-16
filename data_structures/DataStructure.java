@@ -1,14 +1,12 @@
 package data_structures;
 
-import person.Person;
+public interface DataStructure<T extends Comparable<T>> {
 
-public interface DataStructure {
+    public void insert(T itemToInsert);
 
-    public void insert(Person personToInsert);
+    public void remove(T itemToRemove);
 
-    public void remove(Person personToRemove);
-
-    public boolean search(Person personToSearch);
+    public boolean search(T itemToSearch);
 
     public void destroy();
 

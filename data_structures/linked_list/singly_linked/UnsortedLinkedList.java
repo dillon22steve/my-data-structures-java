@@ -1,13 +1,12 @@
 package data_structures.linked_list.singly_linked;
 
 import nodes.linked.Node;
-import person.Person;
 
-public class UnsortedLinkedList extends LinkedList {
+public class UnsortedLinkedList<T extends Comparable<T>> extends LinkedList<T> {
 
     @Override
-    public void insert(Person personToInsert) {
-        Node nodeToInsert = new Node(personToInsert);
+    public void insert(T itemToInsert) {
+        Node<T> nodeToInsert = new Node<T>(itemToInsert);
         nodeToInsert.setNext(head);
         head = nodeToInsert;
     } //insert

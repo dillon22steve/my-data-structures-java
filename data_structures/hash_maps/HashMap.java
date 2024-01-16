@@ -4,12 +4,12 @@ import data_structures.DataStructure;
 import data_structures.linked_list.singly_linked.UnsortedLinkedList;
 import person.Person;
 
-public class HashMap implements DataStructure {
+public class HashMap {
 
-    private UnsortedLinkedList[] map;
+    private UnsortedLinkedList<Person>[] map;
 
     public HashMap(int size) {
-        map = new UnsortedLinkedList[size];
+        //map = new UnsortedLinkedList<Person>[size];
     } //constructor
 
 
@@ -31,11 +31,10 @@ public class HashMap implements DataStructure {
 
 
 
-    @Override
     public void insert(Person personToInsert) {
         int hashIndex = hashFunction(personToInsert);
 
-        if (map[hashIndex] == null) map[hashIndex] = new UnsortedLinkedList();
+        if (map[hashIndex] == null) map[hashIndex] = new UnsortedLinkedList<Person>();
 
         map[hashIndex].insert(personToInsert);
     } //insert
@@ -48,23 +47,28 @@ public class HashMap implements DataStructure {
 
 
 
-    @Override
     public void remove(Person personToRemove) {
         int hashIndex = hashFunction(personToRemove);
-        map[hashIndex].remove(personToRemove);
+        UnsortedLinkedList<Person> listAtHash = map[hashIndex];
+        if (listAtHash != null) 
+            map[hashIndex].remove(personToRemove);
     }
 
 
 
-    @Override
     public boolean search(Person personToSearch) {
         int hashIndex = hashFunction(personToSearch);
-        return map[hashIndex].search(personToSearch);
-    }
+        UnsortedLinkedList<Person> listAtHash = map[hashIndex];
+        if (map[hashIndex] != null) {
+            return listAtHash.search(personToSearch);
+        } else {
+            listAtHash = new UnsortedLinkedList<Person>();
+            return false;
+        } //if
+    } //search
 
 
 
-    @Override
     public void destroy() {
         map = null;
     } //destroy

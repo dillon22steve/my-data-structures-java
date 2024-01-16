@@ -2,12 +2,11 @@ package data_structures.linked_list.singly_linked;
 
 import data_structures.DataStructure;
 import nodes.linked.Node;
-import person.Person;
 
 
-public class LinkedList implements DataStructure {
+public class LinkedList<T extends Comparable<T>> implements DataStructure<T> {
 
-    Node head;
+    Node<T> head;
 
 
     public LinkedList() {
@@ -17,23 +16,23 @@ public class LinkedList implements DataStructure {
 
 
     @Override
-    public void insert(Person personToInsert) {
+    public void insert(T itemToInsert) {
         //This will be implemented in the child classes
     } //insert
 
 
 
     @Override
-    public void remove(Person personToRemove) {
+    public void remove(T itemToRemove) {
         if (isEmpty()) {
             return;
-        } else if (head.getData().equals(personToRemove)) {
+        } else if (head.getData().compareTo(itemToRemove) == 0) {
             head = head.getNext();
         } else {
-            Node temp = head;
+            Node<T> temp = head;
             while (temp.getNext() != null) {
-                Node nextNode = temp.getNext();
-                if (nextNode.getData().equals(personToRemove)) {
+                Node<T> nextNode = temp.getNext();
+                if (nextNode.getData().compareTo(itemToRemove) == 0) {
                     temp.setNext(nextNode.getNext());
                 } else {
                     temp = temp.getNext();
@@ -45,10 +44,10 @@ public class LinkedList implements DataStructure {
 
 
     @Override
-    public boolean search(Person personToSearch) {
-        Node temp = head;
+    public boolean search(T itemToSearch) {
+        Node<T> temp = head;
         while (temp != null) {
-            if (temp.getData().equals(personToSearch)) {
+            if (temp.getData().compareTo(itemToSearch) == 0) {
                 return true;
             } //if
             temp = temp.getNext();
@@ -65,21 +64,11 @@ public class LinkedList implements DataStructure {
     } //destroy
 
 
-    public void insertAll(Person[] people) {
-        for (Person person : people) {
-            this.insert(person);
+    public void insertAll(T[] items) {
+        for (T item : items) {
+            this.insert(item);
         } //for
     } //insertAll
-
-
-    public void printList() {
-        Node temp = head;
-        while (temp != null) {
-            System.out.print("[" + temp.getData().getName() + " is " + temp.getData().getAge() + "], ");
-            temp = temp.getNext();
-        } //while
-        System.out.print("\n");
-    } //printList
 
 
     @Override
@@ -90,13 +79,13 @@ public class LinkedList implements DataStructure {
         } //if
 
         
-        Node temp = head;
+        Node<T> temp = head;
         while (temp.getNext() != null) {
-            list = list + ("[" + temp.getData().getName() + " is " + temp.getData().getAge() + "], ");
+            list = list + ("[" + temp.getData().toString() + "], ");
             temp = temp.getNext();
         } //while
 
-        return (list + "[" + temp.getData().getName() + " is " + temp.getData().getAge() + "]");
+        return (list + "[" + temp.getData().toString() + "]");
     } //toString
 
 
@@ -106,7 +95,7 @@ public class LinkedList implements DataStructure {
 
 
 
-    public Node getHead() {
+    public Node<T> getHead() {
         return this.head;
     } //getHead
     

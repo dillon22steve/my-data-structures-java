@@ -1,7 +1,12 @@
+import java.util.ArrayList;
+
 import data_structures.hash_maps.HashMap;
+import data_structures.heaps.Heap;
 import data_structures.linked_list.doubly_linked.SortedDoublyLinkedList;
 import data_structures.linked_list.singly_linked.SortedLinkedList;
 import data_structures.linked_list.singly_linked.UnsortedLinkedList;
+import data_structures.queues.Queue;
+import data_structures.stack.Stack;
 import data_structures.trees.BinarySearchTree;
 import person.Person;
 
@@ -10,11 +15,9 @@ public class DataStructuresDriver {
     public static void main(String[] args) {
         Person.initIdChars();
         
-        BinarySearchTree test = new BinarySearchTree();
-        UnsortedLinkedList uslist = new UnsortedLinkedList();
-        SortedLinkedList slist = new SortedLinkedList();
-        SortedDoublyLinkedList doubList = new SortedDoublyLinkedList();
-        HashMap map = new HashMap(10);
+        //HashMap map = new HashMap(10);
+        Heap<Person> heap = new Heap<Person>(7);
+
 
         Person steve = new Person("Steve", 31);
         Person rich = new Person("Rich", 28);
@@ -26,46 +29,54 @@ public class DataStructuresDriver {
         Person[] people = {
             steve, rich, lisa, mike, alana, amanda, renee
         };
+        Person testSearch = new Person("Ryan", 21);
 
-        // test.insert(lisa, test.getRoot());
-        // test.insert(rich, test.getRoot());
-        // test.insert(mike, test.getRoot());
-        // test.insert(steve, test.getRoot());
-        // test.insert(alana, test.getRoot());
-        // test.insert(renee, test.getRoot());
-        // test.insert(amanda, test.getRoot());
 
-        // test.inOrderTraversal(test.getRoot());
+
+        /* Testing Hash Map */
+        // map.insertAll(people);
+        // System.out.println(map);
+
+        // map.remove(steve);
+        // System.out.println("---------------------------------------");
+        // System.out.println(map);
+
+        // System.out.println(map.search(steve));
+        // System.out.println(map.search(testSearch));
+
+
+
+        /* Testing Stack */
+        // stack.pushAll(people);
+        // stack.popAllAndPrint();
+
+        // stack.push(steve);
+        // System.out.println(stack.peak().getName());
+
+
+
+        /* Testing Heap */
+        // heap.insertAll(people);
+
+        // ArrayList<Person> arr = heap.getArray();
+        // PrintArrayList(arr);
         // System.out.print("\n");
 
-        // test.remove(lisa, test.getRoot());
-        // test.inOrderTraversal(test.getRoot());
-        // System.out.print("\n");   
-        
-        // System.out.println(test.search(lisa, test.getRoot()));
+        // heap.remove();
+        // PrintArrayList(arr);
+        // System.out.print("\n");
 
-        // doubList.insertAll(people);
-        // System.out.println(doubList);
-
-        // System.out.println("Search steve: " + doubList.search(steve) + ", Search Alana: " + doubList.search(alana) +
-        //     ", Search Mike: " + doubList.search(mike) + ", Search Ryan: " + doubList.search(new Person("Ryan", 23)));
-
-        // doubList.remove(steve);
-        // System.out.println(doubList);
-
-        // doubList.remove(alana);
-        // doubList.insert(steve);
-        // doubList.insert(new Person("Silus", 21));
-        // System.out.println(doubList);
-
-        // doubList.remove(mike);
-        // System.out.println(doubList);
-
-
-
-        map.insertAll(people);
-        System.out.println(map.toString());
+        // heap.remove();
+        // PrintArrayList(arr);
+        // System.out.print("\n");
 
     } //main
+
+
+    public static void PrintArrayList(ArrayList<Person> arrayList) {
+        for (Person person : arrayList) {
+            System.out.print("[" + person.getName() + "], ");
+        } //for
+    } //PrintArrayList
 
 } //DataStructuresDriver

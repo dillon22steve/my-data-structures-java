@@ -1,6 +1,6 @@
 package test;
 
-import person.Person;
+import src.person.Person;
 
 public class TestDriver {
 

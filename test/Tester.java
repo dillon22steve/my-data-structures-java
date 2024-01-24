@@ -1,14 +1,16 @@
 package test;
 
-import data_structures.hash_maps.HashMap;
-import data_structures.linked_list.doubly_linked.SortedDoublyLinkedList;
-import data_structures.linked_list.singly_linked.SortedLinkedList;
-import data_structures.linked_list.singly_linked.UnsortedLinkedList;
-import data_structures.queues.Queue;
-import data_structures.stack.Stack;
-import data_structures.trees.BinarySearchTree;
-import nodes.linked.Node;
-import person.Person;
+import src.data_structures.hash_maps.HashMap;
+import src.data_structures.linked_list.doubly_linked.SortedDoublyLinkedList;
+import src.data_structures.linked_list.singly_linked.SortedLinkedList;
+import src.data_structures.linked_list.singly_linked.UnsortedLinkedList;
+import src.data_structures.queues.Queue;
+import src.data_structures.stack.Stack;
+import src.data_structures.trees.AvlTree;
+import src.data_structures.trees.BinarySearchTree;
+import src.data_structures.trees.RedBlackTree;
+import src.nodes.linked.SinglyLinkedNode;
+import src.person.Person;
 
 
 public class Tester {
@@ -129,6 +131,8 @@ public class Tester {
 
     private void testTrees() {
         testBst();
+        testAvlTree();
+        testRedBlackTree();
     } //TestTrees
     private void testBst() {
         System.out.println("*** Testing BinarySearchTree ***");
@@ -149,6 +153,32 @@ public class Tester {
         System.out.println("*************************************************************************************");
         System.out.println();
     } //TestBst
+
+    private void testAvlTree() {
+        System.out.println("*** Testing AVL Tree ***");
+        AvlTree<Person> tree = new AvlTree<Person>();
+
+        tree.insertAll(people);
+
+        tree.inOrderTraversal(tree.getRoot());
+        System.out.print("\n");
+
+        System.out.println("*************************************************************************************");
+        System.out.println();
+    } //testAvlTree
+
+    private void testRedBlackTree() {
+        System.out.println("*** Testing Red Black Tree ***");
+        RedBlackTree<Person> rbTree = new RedBlackTree<Person>();
+
+        rbTree.insertAll(people);
+
+        rbTree.inOrderTraversal(rbTree.getRootNode());
+        System.out.print("\n");
+
+        System.out.println("*************************************************************************************");
+        System.out.println();
+    }
 
 
 
@@ -194,13 +224,13 @@ public class Tester {
 
         System.out.print("Dequeued in order: ");
         for (int i = 0; i < people.length - 1; i++) {
-            Node<Person> dequeuedNode = queue.dequeue();
+            SinglyLinkedNode<Person> dequeuedNode = queue.dequeue();
             if (dequeuedNode != null) {
                 System.out.print(dequeuedNode.getData().getName() + " -> ");
             } //if
         } //for
 
-        Node<Person> dequeuedNode = queue.dequeue();
+        SinglyLinkedNode<Person> dequeuedNode = queue.dequeue();
         if (dequeuedNode != null) {
             System.out.print(dequeuedNode.getData().getName() + "\n");
         } //if

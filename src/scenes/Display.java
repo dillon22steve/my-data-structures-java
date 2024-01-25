@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 import src.App;
 import src.render.RenderInterface;
+import src.render.hash_map.HashMapRender;
 import src.render.lists.ListRender;
 import src.render.queues.PriorityQueueRender;
 import src.render.queues.QueueRender;
@@ -61,7 +62,7 @@ public class Display {
 
                 break;
             case 'm':
-
+                render = new HashMapRender();
                 break;
         } //switch
 

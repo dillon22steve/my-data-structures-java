@@ -91,6 +91,11 @@ public class HashMap {
     } //search
 
 
+    public HashMapNode get(int index) {
+        return map[index];
+    } //get
+
+
     public void destroy() {
         map = null;
     } //destroy
@@ -123,7 +128,9 @@ public class HashMap {
             list = list.getNext();
         } //while
 
-        str = str + "[" + list.getData().toString() + "]";
+        if (list != null) {
+            str = str + "[" + list.getData().toString() + "]";
+        } //if
 
         return str;
     } //listToString

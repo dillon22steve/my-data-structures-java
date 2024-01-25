@@ -6,7 +6,6 @@ import src.person.Person;
 
 public class HashMapNode extends Node<Person> {
 
-    private Person data;
     private HashMapNode next;
 
 
@@ -15,13 +14,6 @@ public class HashMapNode extends Node<Person> {
     } //constructor
 
 
-
-    public Person getData() {
-        return data;
-    } //getData
-    public void setData(Person data) {
-        this.data = data;
-    } //setData
     public HashMapNode getNext() {
         return next;
     } //getNext

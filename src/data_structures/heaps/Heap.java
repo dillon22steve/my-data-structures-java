@@ -96,15 +96,15 @@ public class Heap<T extends Comparable<T>> {
     } //swap
 
 
-    private int getLeftChild(int parent) {
+    public int getLeftChild(int parent) {
         return (parent * 2) + 1;
     } //getLeftChild
 
-    private int getRightChild(int parent) {
+    public int getRightChild(int parent) {
         return (parent * 2) + 2;
     } //getLeftChild
 
-    private int getParent(int child) {
+    public int getParent(int child) {
         return ((child - 1) / 2);
     } //getParent
 

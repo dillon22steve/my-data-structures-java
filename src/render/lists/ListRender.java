@@ -1,7 +1,6 @@
 package src.render.lists;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 
 import src.data_structures.linked_list.singly_linked.LinkedList;
@@ -14,6 +13,7 @@ import src.render.RenderInterface;
 import src.render.StructureRender;
 import src.scenes.Display;
 import src.utils.HelperMethods;
+import src.utils.constants.FontConstants;
 import src.utils.constants.ImageConstants;
 import src.utils.constants.PersonConstants;
 
@@ -59,6 +59,7 @@ public class ListRender extends StructureRender implements RenderInterface {
     public void render(Graphics g) {
         if (drawStructure) {
             drawList(g);
+            disableRendering();
         } else {
             String name = PersonConstants.people[insertIndex].getName();
             HelperMethods.drawInsertedName(g, name);
@@ -72,15 +73,13 @@ public class ListRender extends StructureRender implements RenderInterface {
         while (temp != null) {
             g.drawImage(ImageConstants.NodeImage, currX, currY, 150, 70, null);
 
-            //System.out.println(temp.getData().getName() + ", " + PersonConstants.people[insertIndex].getName());
-
             boolean isInserted = (temp.getData().compareTo(PersonConstants.people[insertIndex - 1]) == 0);
             if (isInserted) {
                 g.setColor(Color.GREEN);
                 g.drawRect(currX - 5, currY - 5, 160, 80);
             } //if
 
-            g.setFont(new Font("Bookman Old Style", Font.PLAIN, 12));
+            g.setFont(FontConstants.NODE_TEXT_FONT);
             g.setColor(Color.WHITE);
             g.drawString(("Name: " + temp.getData().getName()), currX + 10, currY + 15);
             g.drawString(("Age: " + temp.getData().getAge()), currX + 10, currY + 40);

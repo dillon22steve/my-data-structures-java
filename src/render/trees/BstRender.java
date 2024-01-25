@@ -22,21 +22,20 @@ public class BstRender extends StructureRender implements RenderInterface {
 
     private Tree<Person> tree;
 
-    private int nodeRadius;
-
 
     public BstRender() {
         super();
 
-        nodeRadius = 85;
+        nodeWidth = 70;
+        nodeHeight = 70;
 
         initialX = (Panel.SCREEN_WIDTH / 2) - (150 / 2);
-        initialY = 100;
+        initialY = 50;
         currX = initialX;
         currY = initialY;
 
         xOffset = ((Panel.SCREEN_WIDTH - 100) / 4);
-        yOffset = (Panel.SCREEN_HEIGHT - 200) / 5;
+        yOffset = (Panel.SCREEN_HEIGHT - 200) / 7;
 
         if (Display.DataStructureType == 'b') {
             tree = new BinarySearchTree<Person>();
@@ -50,7 +49,7 @@ public class BstRender extends StructureRender implements RenderInterface {
 
     @Override
     public void insertNext() {
-        if (insertIndex == PersonConstants.people.length) {
+        if (insertIndex >= PersonConstants.people.length) {
             System.exit(0);
         } //if
 
@@ -65,7 +64,12 @@ public class BstRender extends StructureRender implements RenderInterface {
             drawRoot(g);
             drawTree(g, tree.getRoot().getLeftChild(), initialX, (initialY + yOffset), 4, true);
             drawTree(g, tree.getRoot().getRightChild(), initialX, (initialY + yOffset), 4, false);
+
+            disableRendering();
         } else {
+            if (insertIndex >= PersonConstants.people.length) {
+                System.exit(0);
+            } //if
             String name = PersonConstants.people[insertIndex].getName();
             HelperMethods.drawInsertedName(g, name);
         } //if
@@ -76,12 +80,12 @@ public class BstRender extends StructureRender implements RenderInterface {
         g.setFont(new Font("Bookman Old Style", Font.PLAIN, 12));
         g.setColor(Color.WHITE);
 
-        g.drawImage(ImageConstants.NodeImage, initialX, initialY, 70, 70, null);
+        g.drawImage(ImageConstants.NodeImage, initialX, initialY, nodeWidth, nodeHeight, null);
         TreeNode<Person> node = tree.getRoot();
         g.drawString(node.getData().getName(), initialX + 10, initialY + 15);
         g.drawString(("Age: " + node.getData().getAge()), initialX + 10, initialY + 40);
 
-        drawLines(g, initialX, initialY, 4);
+        drawLines(g, initialX, initialY, 2);
     } //drawRoot
 
 
@@ -98,7 +102,7 @@ public class BstRender extends StructureRender implements RenderInterface {
             x = x - newOffset;
         } //if
 
-        g.drawImage(ImageConstants.NodeImage, x, y, 70, 70, null);
+        g.drawImage(ImageConstants.NodeImage, x, y, nodeWidth, nodeHeight, null);
 
         g.setFont(new Font("Bookman Old Style", Font.PLAIN, 12));
         g.setColor(Color.WHITE);
@@ -115,11 +119,8 @@ public class BstRender extends StructureRender implements RenderInterface {
     private void drawLines(Graphics g, int x, int y, int xOffset) {
         int newOffset = (Panel.SCREEN_WIDTH - 100) / (xOffset * 2);
 
-        //g.drawLine((x + 60), (y + 75), ((x + 60) - newOffset), (y + yOffset));
-        //g.drawLine((x + 90), (y + 75), ((x + newOffset)), (y + yOffset));
-
-        g.drawLine(x, (y + 75), ((x - newOffset) + 25), (y + yOffset));
-        g.drawLine((x + 70), (y + 75), (x + newOffset + 25), (y + yOffset));
+        g.drawLine(x, (y + nodeHeight), ((x - newOffset) + 10), (y + yOffset));
+        g.drawLine((x + nodeWidth), (y + nodeHeight), (x + newOffset + 10), (y + yOffset));
     } //drawLines
     
 } //BstRender

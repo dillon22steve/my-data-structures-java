@@ -8,6 +8,7 @@ public class PriorityQueue<T extends Comparable<T>> {
 
     private Heap<T> heap;
 
+
     public PriorityQueue(int maxItems) {
         heap = new Heap<T>(maxItems);
     } //constructor
@@ -40,5 +41,10 @@ public class PriorityQueue<T extends Comparable<T>> {
         T itemAtHighestPriority = heap.getArray().get(heap.getRoot());
         return (itemAtHighestPriority.compareTo(itemToCheck) == 0);
     } //isHighestPriority
+
+
+    public Heap<T> getHeap() {
+        return heap;
+    } //getHeap
     
 } //PriorityQueue

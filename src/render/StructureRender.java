@@ -1,18 +1,24 @@
 package src.render;
 
+import java.awt.Graphics;
+
 import src.App;
+import src.utils.HelperMethods;
+import src.utils.constants.PersonConstants;
 
 public class StructureRender {
 
-    private static long now = System.nanoTime();
-    private static long last = now;
-    private static double timePerDraw = 7_000_000_000.0;
+    protected static long now = System.nanoTime();
+    protected static long last = now;
+    protected static double timePerDraw = 7_000_000_000.0;
 
-    private static float opacityUpdate = 0.8f;
+    protected static float opacityUpdate = 0.8f;
 
     protected int initialX, initialY;
     protected int currY, currX;
     protected int xOffset, yOffset;
+
+    protected int nodeWidth, nodeHeight;
 
     protected int insertIndex;
 
@@ -41,6 +47,8 @@ public class StructureRender {
                 App.opacity = 254;
                 last = now;
                 drawStructure = false;
+
+                enableRendering();
             } //if
         } //if
 
@@ -51,8 +59,25 @@ public class StructureRender {
     } //update
 
 
+    protected void renderInsertText(Graphics g) {
+        if (insertIndex >= PersonConstants.people.length) {
+                System.exit(0);
+            } //if
+            String name = PersonConstants.people[insertIndex].getName();
+            HelperMethods.drawInsertedName(g, name);
+    } //renderInsertText
+
+
     public void insertNext() {
         //This will be overridden by the child classes
     } //insertNext
+
+
+    public void enableRendering() {
+        App.draw = true;
+    } //setDrawToTrue
+    public void disableRendering() {
+        App.draw = false;
+    } //disableDrawing
     
 } //StructureRender

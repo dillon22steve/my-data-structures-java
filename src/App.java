@@ -12,6 +12,8 @@ public class App implements Runnable {
     private final double FPS_SET = 120;
     private final double UPS_SET = 200;
 
+    public static boolean draw = true;
+
     private Panel panel;
     private Frame frame;
     private Thread appThread;
@@ -87,7 +89,10 @@ public class App implements Runnable {
 
             if((now - lastFrame) >= timePerFrame) {
                 lastFrame = now;
-                panel.repaint();
+
+                if (draw == true) {
+                    panel.repaint();
+                } //if
                 //frames++;
             } //if
 

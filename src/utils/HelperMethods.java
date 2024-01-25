@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import src.App;
 import src.gui.Panel;
 import src.person.Person;
+import src.utils.constants.FontConstants;
 import src.utils.constants.ImageConstants;
 import src.utils.constants.PersonConstants;
 
@@ -48,7 +49,7 @@ public class HelperMethods {
 
 
 	public static void drawInsertedName(Graphics g, String name) {
-		g.setFont(new Font("Bookman Old Style", Font.PLAIN, 36));
+		g.setFont(FontConstants.INSERT_TEXT_FONT);
         g.setColor(new Color(255, 255, 255, (int)App.opacity));
 		g.drawString(("Inserting " + name), ((Panel.SCREEN_WIDTH / 2) - 56), 100);
 	} //drawInsertedName

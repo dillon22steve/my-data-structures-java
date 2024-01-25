@@ -72,6 +72,11 @@ public class Queue<T extends Comparable<T>> implements DataStructure<T> {
     } //getFront
 
 
+    public SinglyLinkedNode<T> getRear() {
+        return rear;
+    } //getRear
+
+
     @Override
     public void insert(Comparable itemToInsert) {
         

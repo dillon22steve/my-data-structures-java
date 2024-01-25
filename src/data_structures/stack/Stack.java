@@ -57,5 +57,10 @@ public class Stack<T extends Comparable<T>> {
     public boolean isEmpty() {
         return top == null;
     } //isEmpty
+
+
+    public SinglyLinkedNode<T> getTop() {
+        return top;
+    } //getTop
     
 } //Stack

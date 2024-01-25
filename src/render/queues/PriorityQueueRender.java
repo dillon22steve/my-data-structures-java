@@ -23,7 +23,7 @@ public class PriorityQueueRender extends StructureRender implements RenderInterf
     Heap<Person> heap;
 
 
-    PriorityQueueRender() {
+    public PriorityQueueRender() {
         super();
 
         queue = new PriorityQueue<Person>(PersonConstants.people.length);
@@ -44,9 +44,16 @@ public class PriorityQueueRender extends StructureRender implements RenderInterf
 
 
     @Override
+    public void insertNext() {
+        queue.enqueue(PersonConstants.people[insertIndex]);
+        insertIndex++;
+    }  //insertNext
+
+
+    @Override
     public void render(Graphics g) {
         if (drawStructure) {
-            drawQueue(g, 0);
+            drawQueue(g);
             disableRendering();
         } else {
             renderInsertText(g);
@@ -54,9 +61,52 @@ public class PriorityQueueRender extends StructureRender implements RenderInterf
     } //render
 
 
-    private void drawQueue(Graphics g, int node) {
-        
+    private void drawQueue(Graphics g) {
+        int parent = insertIndex - 1;
+
+        while (parent > 0) {
+            int leftChild = heap.getLeftChild(parent);
+            int rightChild = heap.getRightChild(parent);
+
+            if (leftChild < heap.getArray().size()) {
+                drawNode(g, heap.getArray().get(leftChild));
+            } //if
+            if (rightChild < heap.getArray().size()) {
+                drawNode(g, heap.getArray().get(rightChild));
+            } //if
+
+            parent = parent - 1;
+        } //while
+
+        drawRoot(g);
+
+        currX = initialX;
+        currY = initialY;
+        isEvenRow = false;
+        isDown = false;
     } //drawQueue
+
+
+    private void drawRoot(Graphics g) {
+        if (heap.getArray().size() > 2) {
+            drawNode(g, heap.getArray().get(2));
+        } //if
+        if (heap.getArray().size() > 1) {
+            drawNode(g, heap.getArray().get(1));
+        } //if
+        System.out.print("\n");
+
+        drawPriority(g);
+        drawNode(g, heap.getArray().get(0));
+    } //drawRoot
+
+
+    private void drawPriority(Graphics g) {
+        g.setFont(FontConstants.NODE_TEXT_FONT);
+        g.setColor(Color.GREEN);
+        g.drawString("Highest priority", (currX + (nodeWidth / 4)), (currY - 20));
+    } //drawPriority
+
 
     private void drawNode(Graphics g, Person person) {
         g.drawImage(ImageConstants.NodeImage, currX, currY, nodeWidth, nodeHeight, null);

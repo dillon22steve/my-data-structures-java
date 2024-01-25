@@ -4,6 +4,7 @@ import src.data_structures.hash_maps.HashMap;
 import src.data_structures.linked_list.doubly_linked.SortedDoublyLinkedList;
 import src.data_structures.linked_list.singly_linked.SortedLinkedList;
 import src.data_structures.linked_list.singly_linked.UnsortedLinkedList;
+import src.data_structures.queues.PriorityQueue;
 import src.data_structures.queues.Queue;
 import src.data_structures.stack.Stack;
 import src.data_structures.trees.AvlTree;
@@ -206,6 +207,7 @@ public class Tester {
 
     private void testQueues() {
         testNormalQueue();
+        testPriorityQueue();
     } //testQueues
 
 
@@ -238,6 +240,24 @@ public class Tester {
         System.out.println("*************************************************************************************");
         System.out.println();
     } //testNormalQueue
+
+
+    private void testPriorityQueue() {
+        System.out.println("*** Testing Priority Queue ***");
+        PriorityQueue<Person> queue = new PriorityQueue<Person>(people.length);
+
+        for (int i = 0; i < people.length; i++) {
+            queue.enqueue(people[i]);
+        } //for
+
+        for (int i = 0; i < people.length; i++) {
+            System.out.print(queue.dequeue().getName() + " -> ");
+        } //for
+        System.out.print("\n");
+
+        System.out.println("*************************************************************************************");
+        System.out.println();
+    } //testPriorityQueue
 
 
 

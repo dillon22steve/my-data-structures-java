@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import src.App;
 import src.render.RenderInterface;
 import src.render.lists.ListRender;
+import src.render.queues.PriorityQueueRender;
 import src.render.queues.QueueRender;
 import src.render.stacks.StackRender;
 import src.render.trees.BstRender;
@@ -48,7 +49,7 @@ public class Display {
                 render = new StackRender();
                 break;
             case 'p':
-
+                render = new PriorityQueueRender();
                 break;
             case 'h':
 

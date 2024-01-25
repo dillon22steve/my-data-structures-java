@@ -39,7 +39,7 @@ public class Heap<T extends Comparable<T>> {
             child = parent;
             parent = getParent(child);
 
-            compare = array.get(parent).compareTo(array.get(parent));
+            compare = array.get(child).compareTo(array.get(parent));
         } //while
     } //reheapUp
 
@@ -65,15 +65,23 @@ public class Heap<T extends Comparable<T>> {
 
 
     private void reheapDown(int parent) {
-        int maxChild;
         int leftChild = getLeftChild(parent);
         int rightChild = getRightChild(parent);
+        int maxChild = leftChild;
 
-        if (array.get(leftChild).compareTo(array.get(rightChild)) > 0) {
-            maxChild = leftChild;
-        } else {
-            maxChild = rightChild;
+        boolean checkRightChild = rightChild >= array.size();
+
+        if (checkRightChild && leftChild >= array.size()) {
+            return;
         } //if
+
+        if (!checkRightChild) {
+            if (array.get(leftChild).compareTo(array.get(rightChild)) > 0) {
+                maxChild = leftChild;
+            } else {
+                maxChild = rightChild;
+            } //if
+        }
 
         if (array.get(parent).compareTo(array.get(maxChild)) < 0) {
             swap(parent, maxChild);

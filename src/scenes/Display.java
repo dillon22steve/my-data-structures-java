@@ -10,6 +10,7 @@ import src.render.queues.PriorityQueueRender;
 import src.render.queues.QueueRender;
 import src.render.stacks.StackRender;
 import src.render.trees.BstRender;
+import src.render.trees.RedBlackTreeRender;
 
 public class Display {
 
@@ -59,7 +60,7 @@ public class Display {
 
                 break;
             case 'r':
-
+                render = new RedBlackTreeRender();
                 break;
             case 'm':
                 render = new HashMapRender();

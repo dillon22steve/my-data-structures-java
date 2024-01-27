@@ -73,6 +73,6 @@ public class Tree<T extends Comparable<T>>  {
 
     public void insert(T itemToInsert, TreeNode<T> root) {
         //This will be overridden by the child classes
-    }
+    } //insert
     
 } //Tree

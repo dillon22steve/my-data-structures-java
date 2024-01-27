@@ -1,7 +1,6 @@
 package src.render.trees;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 
 import src.data_structures.trees.AvlTree;
@@ -14,6 +13,7 @@ import src.render.RenderInterface;
 import src.render.StructureRender;
 import src.scenes.Display;
 import src.utils.HelperMethods;
+import src.utils.constants.FontConstants;
 import src.utils.constants.ImageConstants;
 import src.utils.constants.PersonConstants;
 
@@ -61,6 +61,9 @@ public class BstRender extends StructureRender implements RenderInterface {
     @Override
     public void render(Graphics g) {
         if (drawStructure) {
+            g.setFont(FontConstants.NODE_TEXT_FONT);
+            g.setColor(Color.WHITE);
+
             drawRoot(g);
             drawTree(g, tree.getRoot().getLeftChild(), initialX, (initialY + yOffset), 4, true);
             drawTree(g, tree.getRoot().getRightChild(), initialX, (initialY + yOffset), 4, false);
@@ -77,9 +80,6 @@ public class BstRender extends StructureRender implements RenderInterface {
 
 
     private void drawRoot(Graphics g) {
-        g.setFont(new Font("Bookman Old Style", Font.PLAIN, 12));
-        g.setColor(Color.WHITE);
-
         g.drawImage(ImageConstants.NodeImage, initialX, initialY, nodeWidth, nodeHeight, null);
         TreeNode<Person> node = tree.getRoot();
         g.drawString(node.getData().getName(), initialX + 10, initialY + 15);
@@ -104,8 +104,6 @@ public class BstRender extends StructureRender implements RenderInterface {
 
         g.drawImage(ImageConstants.NodeImage, x, y, nodeWidth, nodeHeight, null);
 
-        g.setFont(new Font("Bookman Old Style", Font.PLAIN, 12));
-        g.setColor(Color.WHITE);
         g.drawString(node.getData().getName(), x + 10, y + 15);
         g.drawString(("Age: " + node.getData().getAge()), x + 10, y + 40);
 
